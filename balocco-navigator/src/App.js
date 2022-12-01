@@ -9,6 +9,7 @@ import {LayoutThreeCol} from "@steffo/bluelib-react";
 function App() {
     const [token, setToken] = useState(null);
     const [address, setAddress] = useState(null)
+    const [userData, setUserData] = useState(null)
 
     useEffect(() => {
         onLoad();
@@ -24,7 +25,7 @@ function App() {
             <LayoutThreeCol>
                 <LayoutThreeCol.Center>
                     <div className="App">
-                        <AppContext.Provider value={{token, setToken, address, setAddress}}>
+                        <AppContext.Provider value={{token, setToken, address, setAddress, userData, setUserData}}>
                             <Routes/>
                         </AppContext.Provider>
                     </div>

@@ -7,8 +7,7 @@ export default function Redirect(){
     const {address, setAddress} = useAppContext()
     const navigate = useNavigate()
     useEffect(()=>{
-        console.debug("REDI",addr)
-        localStorage.setItem("address", addr)
+        addr = localStorage.setItem("address", addr)
         setAddress(addr)
         navigate("/srv/login")
     }, [addr])
