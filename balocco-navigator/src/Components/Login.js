@@ -11,6 +11,7 @@ export default function Login() {
     const {address, setAddress} = useAppContext()
     const {loginWithRedirect, user, isAuthenticated, } = useAuth0();
     const [server, setServer] = useState(null)
+    const {auth0Data, setAuth0Data} = useAppContext()
 
     const navigate = useNavigate()
 
@@ -42,6 +43,7 @@ export default function Login() {
                 let values = await response.json()
                 console.debug(values)
                 setServer(values)
+                setAuth0Data({domain: values.domain, clientId: values.oauth_public, audience: values.audience})
             }
             else{
                 alert("Instance is not running.")
