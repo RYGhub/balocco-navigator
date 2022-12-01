@@ -13,8 +13,8 @@ export default function Item(props) {
     const [data, setData] = useState(null)
     const [taken, setTaken] = useState(props.item.taken)
 
-    async function get_item(){
-        const response = await fetch(schema + address + "/api/item/v1/"+props.item.id, {
+    async function get_item() {
+        const response = await fetch(schema + address + "/api/item/v1/" + props.item.id, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -26,18 +26,19 @@ export default function Item(props) {
         });
         if (response.status === 200) {
             let values = await response.json()
-            setData(values)
+            console.debug("data", data)
+            await setData(values)
             console.debug(values)
-            if(!values.taken){
+            if (!values.taken && !props.admin) {
                 await take_item()
                 setTaken(true)
             }
         }
     }
 
-    async function take_item(){
+    async function take_item() {
 
-        const response = await fetch(schema + address + "/api/item/v1/take/"+props.item.id, {
+        const response = await fetch(schema + address + "/api/item/v1/take/" + props.item.id, {
             method: "PATCH",
             credentials: "include",
             headers: {
@@ -56,15 +57,22 @@ export default function Item(props) {
         <Box>
             <Heading level={3}>{props.item.name} {!taken && (<FontAwesomeIcon icon={faNewspaper}/>)}</Heading>
             {show && (
-                <div>
-                    {(data ? (<div>
-                        {data.obtain_action}
-                    </div>):(<div>Loading...</div>))}
-                </div>
+                <Chapter>
+                    <div>
+                        Action: {data.obtain_action}
+                    </div>
+                    <div>
+                        Status: {data.obtainable ? ("Obtainable") : ("Non Obtainable")}
+                    </div>
+                    <div>
+                        Won by: {data.winner ? (data.winner.username) : ("Nobody")}
+                    </div>
+                </Chapter>
             )}
             <Button onClick={e => {
-                setShow(!show)
-                get_item()
+                get_item().then(e => {
+                    setShow(!show)
+                })
             }}>{(show ? ("Close") : ("Details"))}</Button>
         </Box>
     )

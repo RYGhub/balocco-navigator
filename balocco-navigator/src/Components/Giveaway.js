@@ -40,7 +40,7 @@ export default function Giveaway(props) {
     }, [props.giveaway])
 
     return (
-        <Box>
+        <div>
             <Heading level={3}>{props.giveaway.name}</Heading>
             {show && (
                 <div>
@@ -61,6 +61,6 @@ export default function Giveaway(props) {
             <Button onClick={e => {
                 setShow(!show)
             }}>{(show ? ("Less") : ("More"))}</Button>
-        </Box>
+        </div>
     )
 }

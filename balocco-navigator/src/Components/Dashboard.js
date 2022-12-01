@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../libs/Context";
 import ProfileBadge from "./ProfileBadge";
-import {Heading, Panel, Form, Button, Chapter} from "@steffo/bluelib-react";
+import {Heading, Panel, Form, Box, Chapter} from "@steffo/bluelib-react";
 import schema from "../config";
 import Giveaway from "./Giveaway";
 import Item from "./Item";
@@ -46,8 +46,8 @@ export default function Dashboard() {
             <Panel>
                 <Heading level={2}>Ongoing giveaways</Heading>
                 <div className={Style.scrollable}>
-                    {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Giveaway
-                        giveaway={giveaway} key={giveaway.id}/>)}
+                    {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Box><Giveaway
+                        giveaway={giveaway} key={giveaway.id}/></Box>)}
                 </div>
             </Panel>
             <Panel>
