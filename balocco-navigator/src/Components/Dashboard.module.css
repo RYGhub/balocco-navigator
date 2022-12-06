@@ -1,8 +1,16 @@
 .scrollable{
     overflow-y: scroll;
-    max-height: 25rem;
+    max-height: 22rem;
+}
+.scrollable_short{
+    overflow-y: scroll;
+    max-height: 5rem;
 }
 
 .scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollable_short::-webkit-scrollbar {
     display: none;
 }

@@ -9,6 +9,7 @@ import Style from "../Dashboard.module.css";
 import GiveawayAdmin from "./GiveawayAdmin";
 import Modal from "../Modal";
 import NewGiveaway from "./NewGiveaway";
+import NewItem from "./NewItem";
 
 export default function AdminDashboard() {
     const {token, setToken} = useAppContext()
@@ -39,7 +40,6 @@ export default function AdminDashboard() {
         });
         if (response.status === 200) {
             let values = await response.json()
-            console.debug(values)
             setGiveaways(values)
         }
     }
@@ -74,7 +74,7 @@ export default function AdminDashboard() {
                 <Modal show={addItems} onClose={() => {
                     setAddItems(false)
                 }}>
-
+                    <NewItem giveaways={giveaways}/>
                 </Modal>
             </Panel>
         </div>

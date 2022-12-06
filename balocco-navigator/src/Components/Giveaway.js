@@ -28,7 +28,6 @@ export default function Giveaway(props) {
     }
 
     async function check(){
-        console.debug(userData.signups.filter(element => element.giveaway.id===props.giveaway.id))
         if(userData.signups.filter(element => element.giveaway.id===props.giveaway.id).length!==0){
             return;
         }

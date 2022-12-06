@@ -6,7 +6,7 @@ import {useAppContext} from "../libs/Context";
 import {useNavigate} from "react-router-dom";
 
 
-export default function ProfileBadge() {
+export default function ProfileBadge(props) {
     const {user, isAuthenticated, isLoading, getAccessTokenSilently} = useAuth0();
     const {logout} = useAuth0();
     const {address, setAddress} = useAppContext()
@@ -54,7 +54,9 @@ export default function ProfileBadge() {
             {userData.admin_of.length!==0 && (<Button onClick={e => {navigator("/srv/admin")}}>
             Open admin panel
             </Button>)}
-
+            <Button onClick={() => props.setReload(!props.reload)}>
+                Reload
+            </Button>
             <Button onClick={() => logout({returnTo: window.location.origin})}>
                 Logout
             </Button>

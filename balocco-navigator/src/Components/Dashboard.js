@@ -12,13 +12,21 @@ export default function Dashboard() {
     const {token, setToken} = useAppContext()
     const {address, setAddress} = useAppContext()
     const [giveaways, setGiveaways] = useState([])
-    const {userData} = useAppContext()
+    const {userData, setUserData} = useAppContext()
+    const [reload, setReload] = useState(false)
 
     useEffect(() => {
         if (address != null && token != null) {
             get_giveaways()
         }
     }, [address, token])
+
+    useEffect(() => {
+        if (address != null && token != null) {
+            get_giveaways()
+            get_user_data()
+        }
+    }, [reload])
 
     async function get_giveaways() {
         const response = await fetch(schema + address + "/api/giveaway/v1/", {
@@ -33,29 +41,42 @@ export default function Dashboard() {
         });
         if (response.status === 200) {
             let values = await response.json()
-            console.debug(values)
             setGiveaways(values)
         }
+    }
+
+   async function get_user_data(){
+        const response = await fetch(schema + address + "/api/user/v1/self", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        let data = await response.json()
+        setUserData(data);
     }
 
     const navigate = useNavigate()
 
     return (
         <div>
-            <ProfileBadge/>
+            <ProfileBadge reload={reload} setReload={setReload}/>
             <Panel>
-                <Heading level={2}>Ongoing giveaways</Heading>
-                <div className={Style.scrollable}>
-                    {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Box><Giveaway
-                        giveaway={giveaway} key={giveaway.id}/></Box>)}
-                </div>
-            </Panel>
-            <Panel>
-                <Heading level={2}>Won items</Heading>
-                <div className={Style.scrollable}>
-                {userData && (
-                    userData.wins.map(item => <Item item={item} key={item.id}></Item>))}
-                </div>
+                <Chapter>
+                    <Panel>
+                        <Heading level={2}>Ongoing giveaways</Heading>
+                        <div className={Style.scrollable}>
+                            {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Box><Giveaway
+                                giveaway={giveaway} key={giveaway.id}/></Box>)}
+                        </div>
+                    </Panel>
+                    <Panel>
+                        <Heading level={2}>Won items</Heading>
+                        <div className={Style.scrollable}>
+                            {userData && (
+                                userData.wins.map(item => <Item item={item} key={item.id}/>))}
+                        </div>
+                    </Panel>
+                </Chapter>
             </Panel>
         </div>
     )

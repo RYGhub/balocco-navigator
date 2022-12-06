@@ -62,7 +62,6 @@ export default function GiveawayAdmin(props) {
                 })
             });
             let data = await response.json()
-            console.debug(data)
             props.setReload(props.reload)
         } catch (e) {
             console.error(e);
@@ -96,7 +95,6 @@ export default function GiveawayAdmin(props) {
             });
             let data = await response.json()
             alert("Giveaway is now running...")
-            console.debug(data)
         } catch (e) {
             console.error(e);
         }

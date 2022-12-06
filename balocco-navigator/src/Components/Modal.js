@@ -8,7 +8,6 @@ const Modal = ({ modalStyle, children, show, onClose, backdropStyle }) => {
     const modalRef = useRef(null);
     useEffect(
         () => {
-            console.debug(show)
             if (show) {
                 modalRef.current.classList.add(styles.visible);
             }

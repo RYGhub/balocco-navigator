@@ -30,7 +30,6 @@ export default function NewGiveaway(props) {
                 })
             });
             let data = await response.json()
-            console.debug(data)
             props.setReload(props.reload)
         } catch (e) {
             console.error(e);
