@@ -16,13 +16,15 @@ export default function Login() {
     const navigate = useNavigate()
 
     useEffect( () => {
-        if (localStorage.getItem("address") && address == null) {
-            let address = localStorage.getItem("address")
-            console.debug(address)
-            setAddress(address)
+        if (localStorage.getItem("address") ) {
+            if(address===null){
+                let address = localStorage.getItem("address")
+                console.debug(address)
+                setAddress(address)
+            }
             get_server_data(address)
         }
-    }, [])
+    }, [isAuthenticated])
 
     async function get_server_data(address) {
         if(address==null){

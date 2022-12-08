@@ -4,6 +4,7 @@ import {useAuth0} from "@auth0/auth0-react";
 import schema from "../config";
 import {useAppContext} from "../libs/Context";
 import {useNavigate} from "react-router-dom";
+import {audience} from "../oauth_config";
 
 
 export default function ProfileBadge(props) {
@@ -18,9 +19,12 @@ export default function ProfileBadge(props) {
         (async () => {
             try {
                 const token = await getAccessTokenSilently({
-                    audience: 'test',
+                    audience: audience,
                     scope: "openid email profile"
                 });
+                if(address === undefined){
+                    return;
+                }
                 const response = await fetch(schema + address + "/api/user/v1/self", {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -29,9 +33,8 @@ export default function ProfileBadge(props) {
                 let data = await response.json()
                 setUserData(data);
                 setToken(token);
-                console.debug(data)
             } catch (e) {
-                console.error(e);
+
             }
         })();
     }, [getAccessTokenSilently]);
@@ -57,7 +60,7 @@ export default function ProfileBadge(props) {
             <Button onClick={() => props.setReload(!props.reload)}>
                 Reload
             </Button>
-            <Button onClick={() => logout({returnTo: window.location.origin})}>
+            <Button onClick={() => logout({returnTo: window.location.origin+"/"+address})}>
                 Logout
             </Button>
         </Panel>

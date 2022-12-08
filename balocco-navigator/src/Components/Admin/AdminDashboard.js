@@ -22,10 +22,30 @@ export default function AdminDashboard() {
     const [addItems, setAddItems] = useState(false)
 
     useEffect(() => {
-        if (address != null && token != null) {
+        if (address != null) {
+            if(token==null){
+                navigate("/srv/login")
+                return
+            }
             get_giveaways()
+
         }
     }, [address, token, reload])
+
+    useEffect(()=>{
+        if(address!=null){
+            return;
+        }
+
+        let addr = localStorage.getItem("address")
+        if(address){
+            setAddress(addr)
+        }
+        else{
+            navigate("/")
+        }
+
+    }, [address, reload])
 
     async function get_giveaways() {
         const response = await fetch(schema + address + "/api/giveaway/v1/", {

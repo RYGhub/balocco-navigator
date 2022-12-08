@@ -10,7 +10,7 @@ export default function Redirect(){
         if(addr==null){
             return;
         }
-        addr = localStorage.setItem("address", addr)
+        localStorage.setItem("address", addr)
         setAddress(addr)
         navigate("/srv/login")
     }, [addr])

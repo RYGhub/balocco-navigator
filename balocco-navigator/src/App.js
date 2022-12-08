@@ -21,6 +21,9 @@ function App() {
 
     async function onLoad() {
         document.body.style = 'background: #161616;';
+        if(localStorage.getItem("address")){
+            setAddress(localStorage.getItem("address"))
+        }
     }
 
     return (
