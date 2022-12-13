@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import {Bluelib} from "@steffo/bluelib-react";
 import {LayoutThreeCol} from "@steffo/bluelib-react";
 import {Auth0Provider} from "@auth0/auth0-react";
-import {client_id, audience, domain, redirect} from "./oauth_config";
+import {client_id, audience, domain, redirect} from "./env";
 
 
 function App() {

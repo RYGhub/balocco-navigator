@@ -4,7 +4,7 @@ import {useAuth0} from "@auth0/auth0-react";
 import schema from "../config";
 import {useAppContext} from "../libs/Context";
 import {useNavigate} from "react-router-dom";
-import {audience} from "../oauth_config";
+import {audience} from "../env";
 
 
 export default function ProfileBadge(props) {
