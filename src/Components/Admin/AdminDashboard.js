@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../../libs/Context";
-import {Heading, Panel, Form, Button, Chapter} from "@steffo/bluelib-react";
+import {Heading, Panel, Button} from "@steffo/bluelib-react";
 import {schema} from "../../env";
-import Giveaway from "../Giveaway";
-import Item from "../Item";
 import Style from "../Dashboard.module.css";
 import GiveawayAdmin from "./GiveawayAdmin";
 import Modal from "../Modal";
@@ -12,40 +10,13 @@ import NewGiveaway from "./NewGiveaway";
 import NewItem from "./NewItem";
 
 export default function AdminDashboard() {
-    const {token, setToken} = useAppContext()
+    const {token} = useAppContext()
     const {address, setAddress} = useAppContext()
     const [giveaways, setGiveaways] = useState([])
     const [reload, setReload] = useState(false)
-    const {userData} = useAppContext()
     const navigator = useNavigate()
     const [add, setAdd] = useState(false)
     const [addItems, setAddItems] = useState(false)
-
-    useEffect(() => {
-        if (address != null) {
-            if(token==null){
-                navigate("/srv/login")
-                return
-            }
-            get_giveaways()
-
-        }
-    }, [address, token, reload])
-
-    useEffect(()=>{
-        if(address!=null){
-            return;
-        }
-
-        let addr = localStorage.getItem("address")
-        if(address){
-            setAddress(addr)
-        }
-        else{
-            navigate("/")
-        }
-
-    }, [address, reload])
 
     async function get_giveaways() {
         const response = await fetch(schema + address + "/api/giveaway/v1/", {
@@ -63,6 +34,33 @@ export default function AdminDashboard() {
             setGiveaways(values)
         }
     }
+
+    useEffect(() => {
+        if (address != null) {
+            if(token==null){
+                navigator("/srv/login")
+                return
+            }
+            get_giveaways()
+
+        }
+    })
+
+    useEffect(()=>{
+        if(address!=null){
+            return;
+        }
+
+        let addr = localStorage.getItem("address")
+        if(address){
+            setAddress(addr)
+        }
+        else{
+            navigator("/")
+        }
+
+    })
+
 
     const navigate = useNavigate()
 
