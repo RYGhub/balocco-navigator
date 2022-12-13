@@ -1,7 +1,7 @@
 import {Heading, Box, Chapter, Details, Button} from "@steffo/bluelib-react";
 import {useEffect, useState} from "react";
 import {convert} from "../libs/timestamp_to_date";
-import schema from "../config";
+import {schema} from "../env";
 import {useAppContext} from "../libs/Context";
 
 export default function Giveaway(props) {

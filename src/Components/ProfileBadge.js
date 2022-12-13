@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Panel, Button} from "@steffo/bluelib-react";
 import {useAuth0} from "@auth0/auth0-react";
-import schema from "../config";
 import {useAppContext} from "../libs/Context";
 import {useNavigate} from "react-router-dom";
-import {audience} from "../env";
+import {audience, schema} from "../env";
 
 
 export default function ProfileBadge(props) {

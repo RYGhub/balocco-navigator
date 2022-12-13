@@ -1,6 +1,6 @@
 import {Heading, Panel, Box, Form, Button, Chapter} from "@steffo/bluelib-react";
 import {useEffect, useState} from "react";
-import schema from "../../config";
+import {schema} from "../../env";
 import {useAppContext} from "../../libs/Context";
 import Modal from "../Modal";
 import Giveaway from "../Giveaway";
