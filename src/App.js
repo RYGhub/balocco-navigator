@@ -1,5 +1,4 @@
 import Routes from "./Routing";
-import './App.css';
 import {AppContext} from "./libs/Context"
 import React, {useEffect, useState} from "react";
 import {Bluelib} from "@steffo/bluelib-react";
