@@ -1,7 +1,7 @@
 import {Heading, Box, Chapter, Panel, Button, Details} from "@steffo/bluelib-react";
 import {useState} from "react";
 import {convert} from "../libs/timestamp_to_date";
-import schema from "../config";
+import {schema} from "../env";
 import {useAppContext} from "../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faNewspaper} from "@fortawesome/free-solid-svg-icons";

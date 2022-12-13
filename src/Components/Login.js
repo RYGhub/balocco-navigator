@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../libs/Context";
-import schema from "../config";
+import {schema} from "../env";
 import {Heading, Panel, Form, Button, Image} from "@steffo/bluelib-react";
 import {useAuth0} from "@auth0/auth0-react";
 import Dashboard from "./Dashboard";
