@@ -44,7 +44,7 @@ export default function AdminDashboard() {
             get_giveaways()
 
         }
-    })
+    }, [reload])
 
     useEffect(()=>{
         if(address!=null){
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
             navigator("/")
         }
 
-    })
+    }, [reload])
 
 
     const navigate = useNavigate()

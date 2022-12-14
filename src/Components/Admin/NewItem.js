@@ -1,8 +1,7 @@
-import {Heading, Panel, Box, Form, Button} from "@steffo/bluelib-react";
+import {Heading, Panel, Form, Button} from "@steffo/bluelib-react";
 import {useEffect, useState} from "react";
 import {schema} from "../../env";
 import {useAppContext} from "../../libs/Context";
-import Modal from "../Modal";
 import {CSVToArray} from "../../libs/CSVParser";
 
 export default function NewItem(props) {
@@ -17,13 +16,15 @@ export default function NewItem(props) {
     const [name, setName] = useState("")
 
     useEffect(e =>{
+        console.debug(props.giveaways)
+
         let tmp = []
         tmp["..."] = null
         props.giveaways.forEach(e=>{
             tmp[e.name]=e.id;
         })
         setOptions(tmp)
-        setGiveaway(null)
+        setGiveaway("")
     }, [props.giveaways])
 
     function delay(time) {
@@ -34,7 +35,7 @@ export default function NewItem(props) {
         if (started || file == null) {
             return;
         }
-        if(giveaway === null){
+        if(giveaway === ""){
             alert("Select a giveaway.")
             return;
         }
@@ -47,7 +48,7 @@ export default function NewItem(props) {
                 if (data[i][0] === "") {
                     continue
                 }
-                setName("Now processing "+data[i][0]+": contacting steam..."+" ("+i+"/"+(data.length-1)+")")
+                setName("Now processing "+data[i][0]+": contacting steam... ("+i+"/"+(data.length-1)+")")
                 let sdata = null
                 try {
                     sdata = await get_steam_data(data[i][0]);
@@ -56,7 +57,7 @@ export default function NewItem(props) {
                 }
                 sdata = sdata[data[i][0]].data
 
-                setName("Now processing "+data[i][0]+" ( "+sdata.name+"): saving into the database..."+" ("+i+"/"+(data.length-1)+")")
+                setName("Now processing "+data[i][0]+" ( "+sdata.name+" ): saving into the database... ("+i+"/"+(data.length-1)+")")
                 let gamedata = {
                     name: sdata.name,
                     giveaway_id: giveaway,
@@ -101,7 +102,7 @@ export default function NewItem(props) {
                 },
                 body: JSON.stringify(data)
             });
-            let ans = await response.json()
+            await response.json()
         } catch (e) {
             console.error(e);
         }
