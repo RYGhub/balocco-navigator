@@ -14,6 +14,7 @@ export default function Item(props) {
     const [data, setData] = useState(null)
     const [taken, setTaken] = useState(props.item.taken)
     const [genre, setGenre] = useState("")
+    const [action, setAction] = useState("")
 
     async function get_item() {
         if (show === true) {
@@ -39,18 +40,13 @@ export default function Item(props) {
                 }
                 setGenre(genres)
             }
-            console.debug("DATA", values)
-            if (!values.taken && !props.admin) {
-                await take_item()
-                setTaken(true)
-                return;
-            }
-            setTaken(values.taken)
         }
     }
 
     async function take_item() {
-
+        if (props.admin) {
+            return;
+        }
         const response = await fetch(schema + address + "/api/item/v1/take/" + props.item.id, {
             method: "PATCH",
             credentials: "include",
@@ -63,6 +59,8 @@ export default function Item(props) {
         });
         if (response.status === 200) {
             let values = await response.json()
+            setAction(values.obtain_action)
+            setTaken(values.taken)
         }
     }
 
@@ -82,13 +80,23 @@ export default function Item(props) {
                     {data.data && (
                         <div>
                             <Details>
-                                <Panel
-                                    children={data.data.description}/>
+                                <Details.Summary>Description</Details.Summary>
+                                <Details.Content>
+                                    <Panel
+                                        children={data.data.description}/>
+                                </Details.Content>
+
                             </Details>
                             <p>Genres: {genre}</p>
-                            <div>
-                                Reedeem link: {data.obtain_action}
-                            </div>
+
+                            {props.admin ? ("") : (
+                                <Panel>
+                                    <p>Once the key is shown, this game will belong to you, and you won't be able to
+                                        trade it.</p>
+                                    <Button onClick={event => (take_item())}> Show key </Button>
+                                    <p>{action}</p>
+                                </Panel>)}
+
                             <p>APPID: {data.data.appid}</p>
                         </div>
                     )}
