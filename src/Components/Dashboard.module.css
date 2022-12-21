@@ -1,6 +1,6 @@
 .scrollable{
     overflow-y: scroll;
-    max-height: 22rem;
+    max-height: 30rem;
 }
 .scrollable_short{
     overflow-y: scroll;
