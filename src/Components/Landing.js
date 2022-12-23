@@ -22,7 +22,6 @@ export default function Landing() {
         try{
             const response = await fetch(schema + addr + "/api/server/v1/planetarium", {
                 method: "GET",
-                credentials: "include",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
