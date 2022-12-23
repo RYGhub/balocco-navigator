@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faWrench, faGears, faClose, faUsers, faGamepad} from "@fortawesome/free-solid-svg-icons";
 import User from "./User";
 import Item from "../Item";
+import { WeirdFlex } from "../WeirdFlex";
 
 export default function GiveawayAdmin(props) {
     const [show, setShow] = useState(false)
@@ -102,36 +103,27 @@ export default function GiveawayAdmin(props) {
 
     return (
         <>
-            <Giveaway giveaway={props.giveaway}/>
-            <Chapter>
-                <div>
+            <Giveaway giveaway={props.giveaway}>
+                <WeirdFlex>
                     <Button onClick={() => {
                         setShowUsers(true)
-                    }}><FontAwesomeIcon icon={faUsers}/></Button>
-                </div>
-                <div>
+                    }}><FontAwesomeIcon icon={faUsers}/>&nbsp;Show users</Button>
                     <Button onClick={() => {
                         setShowGames(true)
-                    }}><FontAwesomeIcon icon={faGamepad}/></Button>
-                </div>
-            </Chapter>
-            <Chapter>
-                <div>
+                    }}><FontAwesomeIcon icon={faGamepad}/>&nbsp;Show items (admin)</Button>
+                </WeirdFlex>
+                <WeirdFlex>
                     <Button onClick={() => {
                         setShow(true)
-                    }}><FontAwesomeIcon icon={faWrench}/></Button>
-                </div>
-                <div>
+                    }}><FontAwesomeIcon icon={faWrench}/>&nbsp;Edit details</Button>
                     <Button onClick={() => {
                         close()
-                    }}><FontAwesomeIcon icon={faClose}/></Button>
-                </div>
-                <div>
+                    }}><FontAwesomeIcon icon={faClose}/>&nbsp;Close</Button>
                     <Button onClick={() => {
                         run()
-                    }}><FontAwesomeIcon icon={faGears}/></Button>
-                </div>
-            </Chapter>
+                    }} builtinColor="lime"><FontAwesomeIcon icon={faGears}/>&nbsp;Giveaway!</Button>
+                </WeirdFlex>
+            </Giveaway>
 
 
             <Modal show={show} onClose={() => {

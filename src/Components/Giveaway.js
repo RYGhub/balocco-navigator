@@ -7,6 +7,9 @@ import Modal from "./Modal";
 import Item from "./Item";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGamepad} from "@fortawesome/free-solid-svg-icons";
+import { WeirdFlex } from "./WeirdFlex";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 export default function Giveaway(props) {
     const [show, setShow] = useState()
@@ -20,11 +23,9 @@ export default function Giveaway(props) {
     async function subscribe(){
         const response = await fetch(schema + address + "/api/giveaway/v1/join/"+props.giveaway.id, {
             method: "PATCH",
-            credentials: "include",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.DOMAIN,
                 Authorization: `Bearer ${token}`,
             },
         });
@@ -39,6 +40,7 @@ export default function Giveaway(props) {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
+                    'Accept': 'application/json',
                     "Content-Type": "application/json"
                 },
             });
@@ -69,22 +71,26 @@ export default function Giveaway(props) {
             <Heading level={3}>{props.giveaway.name}</Heading>
             {show && (
                 <>
-                    <p>
+                    {props.giveaway.description && <p>
                         {props.giveaway.description}
-                    </p>
+                    </p>}
                     <p>
                         Subscriptions open until: {convert(props.giveaway.closing_date)}
                     </p>
                     <p>
                         Giveaway starts at: {convert(props.giveaway.assignment_date)}
                     </p>
-                    {subscribable ? (
-                        <Button onClick={event => {subscribe()}}>Subscribe</Button>
-                    ) : (<Button disabled={true}>You are already subscribed.</Button>)}
+                    <WeirdFlex>
+                        {subscribable ? (
+                            <Button onClick={event => {subscribe()}}><FontAwesomeIcon icon={faPlus}/>&nbsp;Subscribe</Button>
+                        ) : (<Button disabled={true}><FontAwesomeIcon icon={faCheckCircle}/>&nbsp;Subscribed!</Button>)}
 
-                    <Button onClick={() => {
-                        get_data()
-                    }}><FontAwesomeIcon icon={faGamepad}/></Button>
+                        <Button onClick={() => {
+                            get_data()
+                        }}><FontAwesomeIcon icon={faGamepad}/>&nbsp;Show items</Button>
+                    </WeirdFlex>
+
+                    {props.children}
 
                     <Modal show={showGames} onClose={() => {
                         setShowGames(false)
