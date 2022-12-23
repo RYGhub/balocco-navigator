@@ -36,11 +36,9 @@ export default function Item(props) {
         }
         const response = await fetch(schema + address + "/api/user/v1/", {
             method: "GET",
-            credentials: "include",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.DOMAIN,
                 Authorization: `Bearer ${token}`,
             },
         });
@@ -62,11 +60,9 @@ export default function Item(props) {
 
         const response = await fetch(schema + address + "/api/item/v1/" + props.item.id, {
             method: "GET",
-            credentials: "include",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.DOMAIN,
                 Authorization: `Bearer ${token}`,
             },
         });
@@ -89,11 +85,9 @@ export default function Item(props) {
         }
         const response = await fetch(schema + address + "/api/item/v1/take/" + props.item.id, {
             method: "PATCH",
-            credentials: "include",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.DOMAIN,
                 Authorization: `Bearer ${token}`,
             },
         });
@@ -110,11 +104,9 @@ export default function Item(props) {
         }
         const response = await fetch(schema + address + "/api/item/v1/send/" + props.item.id, {
             method: "PATCH",
-            credentials: "include",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.DOMAIN,
                 Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({user_id:usr})

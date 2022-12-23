@@ -32,11 +32,9 @@ export default function Dashboard() {
     async function get_giveaways() {
         const response = await fetch(schema + address + "/api/giveaway/v1/", {
             method: "GET",
-            credentials: "include",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.DOMAIN,
                 Authorization: `Bearer ${token}`,
             },
         });
