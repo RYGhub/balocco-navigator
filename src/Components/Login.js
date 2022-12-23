@@ -5,6 +5,7 @@ import {schema} from "../env";
 import {Heading, Panel, Form, Button, Image} from "@steffo/bluelib-react";
 import {useAuth0} from "@auth0/auth0-react";
 import Dashboard from "./Dashboard";
+import ServerTitle from "./ServerTitle";
 
 export default function Login() {
     const {token, setToken} = useAppContext()
@@ -56,15 +57,11 @@ export default function Login() {
 
     return (
         <div>
-            <Heading level={1}>{(server ? (server.server.name) : (address) )}</Heading>
-            {(server ? (<Image style={{width:"10%"}} src={server.server.logo_uri}>
-
-            </Image>) : (<></>))}
-            <p className="text-muted">
-                {(server ? (server.server.motd) : ("Now connecting, please wait...") )}
-            </p>
+            <ServerTitle server={server}/>
             {!isAuthenticated  && (
-                <Button children={"Login using Auth0"} onClick={e => loginWithRedirect()}/>)}
+                <Panel>
+                    <Button children={"Login"} onClick={e => loginWithRedirect()}/>
+                </Panel>)}
             {isAuthenticated  && (
                 <Dashboard/>
             )}
