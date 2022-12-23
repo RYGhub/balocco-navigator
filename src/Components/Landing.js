@@ -63,9 +63,7 @@ export default function Landing() {
                                     placeholder={""} label={"Address"}>
                         </Form.Field>
                     </Form.Row>
-                    <Button bluelibClassNames={"color-lime"} onClick={() => {
-                        conn()
-                    }}>
+                    <Button bluelibClassNames={"color-lime"} onClick={conn}>
                         {"Connect"}
                     </Button>
                 </Form>
