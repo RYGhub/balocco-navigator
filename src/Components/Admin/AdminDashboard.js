@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react"
 import {useNavigate} from "react-router-dom";
 import {useAppContext} from "../../libs/Context";
-import {Heading, Panel, Button} from "@steffo/bluelib-react";
+import {Heading, Panel, Button, Chapter} from "@steffo/bluelib-react";
 import {schema} from "../../env";
 import Style from "../Dashboard.module.css";
 import GiveawayAdmin from "./GiveawayAdmin";
 import Modal from "../Modal";
 import NewGiveaway from "./NewGiveaway";
 import NewItem from "./NewItem";
+import { WeirdFlex } from "../WeirdFlex";
 
 export default function AdminDashboard() {
     const {token} = useAppContext()
@@ -21,11 +22,9 @@ export default function AdminDashboard() {
     async function get_giveaways() {
         const response = await fetch(schema + address + "/api/giveaway/v1/", {
             method: "GET",
-            credentials: "include",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': process.env.DOMAIN,
                 Authorization: `Bearer ${token}`,
             },
         });
@@ -67,34 +66,43 @@ export default function AdminDashboard() {
     return (
         <div>
             <Heading level={1}>Admin Dashboard</Heading>
-            <Button onClick={e => {
-                navigate("/" + address)
-            }}>Go back</Button>
-            <Button onClick={e => {
-                setReload(!reload)
-            }}>Reload</Button>
             <Panel>
-                <Heading level={2}>Giveaways</Heading>
-                <div className={Style.scrollable}>
-                    {giveaways.map(giveaway => <GiveawayAdmin
-                        giveaway={giveaway} reload={reload} setReload={setReload} key={giveaway.id}/>)}
-                </div>
-                <Button onClick={e=>{setAdd(true)}}>Add giveaway</Button>
-                <Modal show={add} onClose={() => {
-                    setAdd(false)
-                }}>
-                    <NewGiveaway reload={reload} setReload={setReload}/>
-                </Modal>
+                <Heading level={2}>
+                    Actions
+                </Heading>
+                <WeirdFlex>
+                    <Button onClick={e => {
+                        navigate("/" + address)
+                    }}>Go back</Button>
+                    <Button onClick={e => {
+                        setReload(!reload)
+                    }}>Refresh</Button>
+                </WeirdFlex>
             </Panel>
-            <Panel>
-                <Heading level={2}>Items</Heading>
-                <Button onClick={e=>{setAddItems(true)}}>Add items</Button>
-                <Modal show={addItems} onClose={() => {
-                    setAddItems(false)
-                }}>
-                    <NewItem giveaways={giveaways}/>
-                </Modal>
-            </Panel>
+            <Chapter>
+                <Panel>
+                    <Heading level={2}>Giveaways</Heading>
+                    <div className={Style.scrollable}>
+                        {giveaways.map(giveaway => <GiveawayAdmin
+                            giveaway={giveaway} reload={reload} setReload={setReload} key={giveaway.id}/>)}
+                    </div>
+                    <Button onClick={e=>{setAdd(true)}}>Add giveaway</Button>
+                    <Modal show={add} onClose={() => {
+                        setAdd(false)
+                    }}>
+                        <NewGiveaway reload={reload} setReload={setReload}/>
+                    </Modal>
+                </Panel>
+                <Panel>
+                    <Heading level={2}>Items</Heading>
+                    <Button onClick={e=>{setAddItems(true)}}>Add items</Button>
+                    <Modal show={addItems} onClose={() => {
+                        setAddItems(false)
+                    }}>
+                        <NewItem giveaways={giveaways}/>
+                    </Modal>
+                </Panel>
+            </Chapter>
         </div>
     )
 }

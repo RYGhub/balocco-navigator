@@ -65,10 +65,10 @@ export default function Giveaway(props) {
     }, [props.giveaway])
 
     return (
-        <div>
+        <Panel>
             <Heading level={3}>{props.giveaway.name}</Heading>
             {show && (
-                <div>
+                <>
                     <p>
                         {props.giveaway.description}
                     </p>
@@ -94,11 +94,11 @@ export default function Giveaway(props) {
                             {items.map(item=><Item item={item} key={item.id} admin={true}/>)}
                         </Panel>
                     </Modal>
-                </div>
+                </>
             )}
             <Button onClick={e => {
                 setShow(!show)
             }}>{(show ? ("Less") : ("More"))}</Button>
-        </div>
+        </Panel>
     )
 }

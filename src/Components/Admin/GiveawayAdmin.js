@@ -101,7 +101,7 @@ export default function GiveawayAdmin(props) {
     }
 
     return (
-        <Box>
+        <>
             <Giveaway giveaway={props.giveaway}/>
             <Chapter>
                 <div>
@@ -179,6 +179,6 @@ export default function GiveawayAdmin(props) {
                     {items.map(item=><Item item={item} key={item.id} admin={true}/>)}
                 </Panel>
             </Modal>
-        </Box>
+        </>
     )
 }
