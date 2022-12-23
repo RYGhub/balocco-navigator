@@ -1,7 +1,7 @@
 import React, {useState} from "react"
 
 import {useAppContext} from "../libs/Context";
-import {Form, Button} from "@steffo/bluelib-react";
+import {Form, Button, Heading} from "@steffo/bluelib-react";
 import {schema} from "../env";
 
 
@@ -41,25 +41,25 @@ export default function UsernameChanger() {
         }
     }
 
-    return (
-        <div>
-            <p>
-                If your username wasn't automatically set-up, or you want to change it, do it so here. Keep in mind that
-                this username will be needed by other users to identify you.
-            </p>
-            <Form>
-                <Form.Row>
-                    <Form.Field onSimpleChange={e => setUsername(e)} value={username}
-                                placeholder={""} label={"Username"}>
-                    </Form.Field>
-                    <Button onClick={() => {
-                        save()
-                    }}>
-                        {"Update"}
-                    </Button>
-                </Form.Row>
+    return <>
+        <Heading level={2}>
+            Change username
+        </Heading>
+        <p>
+            If your username wasn't automatically set-up, or if you want to change it, you can do so here.
+        </p>
+        <Form>
+            <Form.Row>
+                <Form.Field onSimpleChange={e => setUsername(e)} value={username}
+                            placeholder={""} label={"Username"}>
+                </Form.Field>
+                <Button onClick={() => {
+                    save()
+                }}>
+                    {"Update"}
+                </Button>
+            </Form.Row>
 
-            </Form>
-        </div>
-    )
+        </Form>
+    </>
 }

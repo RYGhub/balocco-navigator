@@ -61,30 +61,22 @@ export default function Dashboard() {
     return (
         <div>
             <ProfileBadge reload={reload} setReload={setReload}/>
-            <Panel>
-                <Chapter>
-                    <Panel>
-                        <Heading level={2}>Ongoing giveaways</Heading>
-                        <div className={Style.scrollable}>
-                            {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Box key={giveaway.id}><Giveaway
-                                giveaway={giveaway}/></Box>)}
-                        </div>
-                    </Panel>
-                    <Panel>
-                        <Heading level={2}>Won items</Heading>
-                        <div className={Style.scrollable}>
-                            {userData && (
-                                userData.wins.map(item => <Item item={item} key={item.id}/>))}
-                        </div>
-                    </Panel>
-                </Chapter>
-            </Panel>
-            {userData && (
+            <Chapter>
                 <Panel>
-                    <UsernameChanger></UsernameChanger>
+                    <Heading level={2}>Ongoing giveaways</Heading>
+                    <div className={Style.scrollable}>
+                        {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Box key={giveaway.id}><Giveaway
+                            giveaway={giveaway}/></Box>)}
+                    </div>
                 </Panel>
-            )}
-
+                <Panel>
+                    <Heading level={2}>Gifts received</Heading>
+                    <div className={Style.scrollable}>
+                        {userData && (
+                            userData.wins.map(item => <Item item={item} key={item.id}/>))}
+                    </div>
+                </Panel>
+            </Chapter>
         </div>
     )
 }

@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Panel, Button} from "@steffo/bluelib-react";
+import {Panel, Button, Heading, Code, Chapter} from "@steffo/bluelib-react";
 import {useAuth0} from "@auth0/auth0-react";
 import {useAppContext} from "../libs/Context";
 import {useNavigate} from "react-router-dom";
 import {audience, schema} from "../env";
+import { WeirdFlex } from "./WeirdFlex";
+import UsernameChanger from "./UsernameChanger";
 
 
 export default function ProfileBadge(props) {
@@ -49,20 +51,31 @@ export default function ProfileBadge(props) {
 
     return (
         isAuthenticated &&
-        <Panel>
+        <Chapter>
             <Panel>
-                Logged in as {user.email}
+                <Heading level={2}>
+                    Welcome
+                </Heading>
+                <p>
+                    You are logged in as {} <Code>{user.email}</Code>.
+                </p>
+                <WeirdFlex>
+                    <Button onClick={() => props.setReload(!props.reload)}>
+                        Refresh data
+                    </Button>
+                    {userData.admin_of.length!==0 && (<Button onClick={e => {navigator("/srv/admin")}}>
+                        Open admin panel
+                    </Button>)}
+                </WeirdFlex>
+                <WeirdFlex>
+                    <Button onClick={() => logout({returnTo: window.location.origin+"/"+address})} builtinColor="red">
+                        Logout
+                    </Button>
+                </WeirdFlex>
             </Panel>
-            {userData.admin_of.length!==0 && (<Button onClick={e => {navigator("/srv/admin")}}>
-            Open admin panel
-            </Button>)}
-            <Button onClick={() => props.setReload(!props.reload)}>
-                Reload
-            </Button>
-            <Button onClick={() => logout({returnTo: window.location.origin+"/"+address})}>
-                Logout
-            </Button>
-        </Panel>
-
+            <Panel>
+                <UsernameChanger></UsernameChanger>
+            </Panel>
+        </Chapter>
     );
 }
