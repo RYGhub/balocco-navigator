@@ -26,7 +26,6 @@ export default function Landing() {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': process.env.DOMAIN
                 },
             });
             if (response.status === 200) {
