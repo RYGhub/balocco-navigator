@@ -8,6 +8,7 @@ import {faNewspaper} from "@fortawesome/free-solid-svg-icons";
 import Style from "./Dashboard.module.css";
 import { faStore } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { BaseElement } from "@steffo/bluelib-react";
 
 export default function Item(props) {
     const [show, setShow] = useState()
@@ -125,6 +126,9 @@ export default function Item(props) {
                 <Heading level={3}>{props.item.name}</Heading>
                 {show && data && (
                     <div>
+                        <Panel>
+                            <FontAwesomeIcon icon={faUser}/> Gifted to: <BaseElement disabled={!Boolean(data.winner)} kind="span">{data.winner ? <b>{data.winner?.username}</b> : <small>Nobody yet</small>}</BaseElement>
+                        </Panel>
                         <Chapter>
                             <Panel>
                                 <a href={`https://store.steampowered.com/app/${data.data.appid}`}>
@@ -135,9 +139,6 @@ export default function Item(props) {
                                 {genre.map(g => g.description).join(", ")}
                             </Panel>
                         </Chapter>
-                        <Panel>
-                            <FontAwesomeIcon icon={faUser}/> Won by: {data.winner?.username ?? "Nobody yet"}
-                        </Panel>
                         {data.data && (
                             <div>
                                 <Panel>
