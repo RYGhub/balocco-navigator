@@ -26,7 +26,7 @@ export default function ProfileBadge(props) {
                 if(address === undefined){
                     return;
                 }
-                const response = await fetch(window.location.protocol + address + "/api/user/v1/self", {
+                const response = await fetch(window.location.protocol + "//" + address + "/api/user/v1/self", {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

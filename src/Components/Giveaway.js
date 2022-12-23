@@ -21,7 +21,7 @@ export default function Giveaway(props) {
     const [items, setItems] = useState([])
 
     async function subscribe(){
-        const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/join/"+props.giveaway.id, {
+        const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/join/"+props.giveaway.id, {
             method: "PATCH",
             headers: {
                 'Accept': 'application/json',
@@ -36,7 +36,7 @@ export default function Giveaway(props) {
 
     async function get_data(){
         try {
-            const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/"+props.giveaway.id, {
+            const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/"+props.giveaway.id, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,

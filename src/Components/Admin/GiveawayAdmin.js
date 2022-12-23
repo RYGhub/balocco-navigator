@@ -31,7 +31,7 @@ export default function GiveawayAdmin(props) {
 
     async function get_data(){
         try {
-            const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/"+props.giveaway.id, {
+            const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/"+props.giveaway.id, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ export default function GiveawayAdmin(props) {
 
     async function update(){
         try {
-            const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/"+props.giveaway.id, {
+            const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/"+props.giveaway.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -71,7 +71,7 @@ export default function GiveawayAdmin(props) {
 
     async function close(){
         try {
-            const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/close/"+props.giveaway.id, {
+            const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/close/"+props.giveaway.id, {
                 method: "PATCH",
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ export default function GiveawayAdmin(props) {
 
     async function run(){
         try {
-            const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/provide/"+props.giveaway.id, {
+            const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/provide/"+props.giveaway.id, {
                 method: "PUT",
                 headers: {
                     Authorization: `Bearer ${token}`,

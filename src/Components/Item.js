@@ -36,7 +36,7 @@ export default function Item(props) {
         if(props.admin){
             return
         }
-        const response = await fetch(window.location.protocol + address + "/api/user/v1/", {
+        const response = await fetch(window.location.protocol + "//" + address + "/api/user/v1/", {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -60,7 +60,7 @@ export default function Item(props) {
             await setupOptions(users)
         }
 
-        const response = await fetch(window.location.protocol + address + "/api/item/v1/" + props.item.id, {
+        const response = await fetch(window.location.protocol + "//" + address + "/api/item/v1/" + props.item.id, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -82,7 +82,7 @@ export default function Item(props) {
         if (props.admin) {
             return;
         }
-        const response = await fetch(window.location.protocol + address + "/api/item/v1/take/" + props.item.id, {
+        const response = await fetch(window.location.protocol + "//" + address + "/api/item/v1/take/" + props.item.id, {
             method: "PATCH",
             headers: {
                 'Accept': 'application/json',
@@ -101,7 +101,7 @@ export default function Item(props) {
         if(usr===null){
             return;
         }
-        const response = await fetch(window.location.protocol + address + "/api/item/v1/send/" + props.item.id, {
+        const response = await fetch(window.location.protocol + "//" + address + "/api/item/v1/send/" + props.item.id, {
             method: "PATCH",
             headers: {
                 'Accept': 'application/json',

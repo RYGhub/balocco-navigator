@@ -16,7 +16,7 @@ export default function NewGiveaway(props) {
 
     async function save() {
         try {
-            const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/", {
+            const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,

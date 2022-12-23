@@ -22,7 +22,7 @@ export default function AdminDashboard() {
     const [addItems, setAddItems] = useState(false)
 
     async function get_giveaways() {
-        const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/", {
+        const response = await fetch(window.location.protocol + "//" + address + "/api/giveaway/v1/", {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
