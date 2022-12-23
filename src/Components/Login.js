@@ -33,13 +33,11 @@ export default function Login() {
         }
         console.debug(address)
         try{
-            const response = await fetch(schema + address + "/api/server/v1/planetarium", {
+            const response = await fetch(`${window.location.protocol}//${address}/api/server/v1/planetarium`, {
                 method: "GET",
-                credentials: "include",
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': process.env.DOMAIN
                 },
             });
             if (response.status === 200) {

@@ -19,7 +19,7 @@ export default function Landing() {
 
     async function conn(){
         try{
-            const response = await fetch(addr + "/api/server/v1/planetarium", {
+            const response = await fetch(`${window.location.protocol}//${addr}/api/server/v1/planetarium`, {
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
