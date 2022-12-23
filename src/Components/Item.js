@@ -122,8 +122,8 @@ export default function Item(props) {
     }
     if(!disable){
         return (
-            <Panel>
-                <Heading level={3}>{props.item.name} {!taken && (<FontAwesomeIcon icon={faNewspaper}/>)}</Heading>
+            <Panel disabled={taken}>
+                <Heading level={3}>{props.item.name}</Heading>
                 {show && data && (
                     <div>
                         <Chapter>
