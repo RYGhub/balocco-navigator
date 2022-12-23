@@ -9,6 +9,8 @@ import Modal from "../Modal";
 import NewGiveaway from "./NewGiveaway";
 import NewItem from "./NewItem";
 import { WeirdFlex } from "../WeirdFlex";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 export default function AdminDashboard() {
     const {token} = useAppContext()
@@ -86,7 +88,7 @@ export default function AdminDashboard() {
                         {giveaways.map(giveaway => <GiveawayAdmin
                             giveaway={giveaway} reload={reload} setReload={setReload} key={giveaway.id}/>)}
                     </div>
-                    <Button onClick={e=>{setAdd(true)}}>Add giveaway</Button>
+                    <Button onClick={e=>{setAdd(true)}}><FontAwesomeIcon icon={faCirclePlus}/>&nbsp;Add giveaway</Button>
                     <Modal show={add} onClose={() => {
                         setAdd(false)
                     }}>
@@ -95,7 +97,7 @@ export default function AdminDashboard() {
                 </Panel>
                 <Panel>
                     <Heading level={2}>Items</Heading>
-                    <Button onClick={e=>{setAddItems(true)}}>Add items</Button>
+                    <Button onClick={e=>{setAddItems(true)}}><FontAwesomeIcon icon={faCirclePlus}/>&nbsp;Add items</Button>
                     <Modal show={addItems} onClose={() => {
                         setAddItems(false)
                     }}>
