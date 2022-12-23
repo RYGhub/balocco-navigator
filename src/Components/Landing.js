@@ -54,7 +54,9 @@ export default function Landing() {
 
             </div>
             <Panel style={{minWidth: "unset"}}>
-                To connect to an instance, write the backend address below and click on "Connect".
+                <p>
+                    To connect to an instance, write the backend address below and click on "Connect".
+                </p>
                 <Form>
                     <Form.Row>
                         <Form.Field onSimpleChange={e => setAddr(e)} value={addr} required={true}
