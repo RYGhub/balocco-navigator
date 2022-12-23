@@ -57,7 +57,7 @@ export default function Landing() {
                 </p>
                 <Form>
                     <Form.Row>
-                        <Form.Field onSimpleChange={e => setAddr(e)} value={addr} required={true}
+                        <Form.Field onSimpleChange={setAddr} value={addr} required={true}
                                     placeholder={""} label={"Address"}>
                         </Form.Field>
                     </Form.Row>
