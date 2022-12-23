@@ -3,7 +3,6 @@ import Style from "./Landing.module.css";
 import {Button, Form, Heading, Panel,} from "@steffo/bluelib-react";
 import {useAppContext} from "../libs/Context";
 import {useNavigate} from "react-router-dom";
-import {schema} from "../env";
 
 export default function Landing() {
     const {address, setAddress} = useAppContext()
@@ -20,7 +19,7 @@ export default function Landing() {
 
     async function conn(){
         try{
-            const response = await fetch(schema + addr + "/api/server/v1/planetarium", {
+            const response = await fetch(addr + "/api/server/v1/planetarium", {
                 method: "GET",
                 headers: {
                     'Accept': 'application/json',
