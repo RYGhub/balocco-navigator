@@ -38,7 +38,7 @@ export default function Landing() {
             }
         }
         catch (e) {
-            alert("No instance running at address.")
+            alert(`Couldn't send request to address: ${e}`)
         }
     }
 
