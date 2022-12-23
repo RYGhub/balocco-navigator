@@ -71,9 +71,11 @@ export default function Giveaway(props) {
             <Heading level={3}>{props.giveaway.name}</Heading>
             {show && (
                 <>
-                    {props.giveaway.description && <p>
-                        {props.giveaway.description}
-                    </p>}
+                    <Panel>
+                        {props.giveaway.description && <p>
+                            {props.giveaway.description}
+                        </p>}
+                    </Panel>
                     <p>
                         Subscriptions open until: {convert(props.giveaway.closing_date)}
                     </p>
@@ -82,8 +84,8 @@ export default function Giveaway(props) {
                     </p>
                     <WeirdFlex>
                         {subscribable ? (
-                            <Button onClick={event => {subscribe()}}><FontAwesomeIcon icon={faPlus}/>&nbsp;Subscribe</Button>
-                        ) : (<Button disabled={true}><FontAwesomeIcon icon={faCheckCircle}/>&nbsp;Subscribed!</Button>)}
+                            <Button builtinColor="lime" onClick={event => {subscribe()}}><FontAwesomeIcon icon={faPlus}/>&nbsp;Subscribe</Button>
+                        ) : (<Button builtinColor="lime" disabled={true}><FontAwesomeIcon icon={faCheckCircle}/>&nbsp;Subscribed!</Button>)}
 
                         <Button onClick={() => {
                             get_data()
