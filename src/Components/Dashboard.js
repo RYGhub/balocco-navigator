@@ -30,7 +30,7 @@ export default function Dashboard() {
     }, [reload])
 
     async function get_giveaways() {
-        const response = await fetch(schema + address + "/api/giveaway/v1/", {
+        const response = await fetch(window.location.protocol + address + "/api/giveaway/v1/", {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -45,7 +45,7 @@ export default function Dashboard() {
     }
 
    async function get_user_data(){
-        const response = await fetch(schema + address + "/api/user/v1/self", {
+        const response = await fetch(window.location.protocol + address + "/api/user/v1/self", {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

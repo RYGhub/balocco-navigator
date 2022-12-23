@@ -81,7 +81,7 @@ export default function NewItem(props) {
     }
 
     async function get_steam_data(appid) {
-        const response = await fetch(schema + address + "/api/item/v1/steam/" + appid, {
+        const response = await fetch(window.location.protocol + address + "/api/item/v1/steam/" + appid, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -94,7 +94,7 @@ export default function NewItem(props) {
 
     async function save(data) {
         try {
-            const response = await fetch(schema + address + "/api/item/v1/", {
+            const response = await fetch(window.location.protocol + address + "/api/item/v1/", {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${token}`,

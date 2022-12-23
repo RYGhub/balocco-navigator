@@ -14,7 +14,7 @@ export default function UsernameChanger() {
     async function save() {
         try {
             console.debug(token)
-            const response = await fetch(schema + address + "/api/user/v1/self", {
+            const response = await fetch(window.location.protocol + address + "/api/user/v1/self", {
                 method: "PUT",
                 headers: {
                     'Accept': 'application/json',

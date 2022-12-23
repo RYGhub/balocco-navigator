@@ -1,4 +1,4 @@
-import {Heading, Box, Chapter, Panel, Button, Details, Form} from "@steffo/bluelib-react";
+import {Heading, Box, Chapter, Panel, Button, Details, Form, Code, Preformatted} from "@steffo/bluelib-react";
 import {useEffect, useState} from "react";
 import {convert} from "../libs/timestamp_to_date";
 import {schema} from "../env";
@@ -6,6 +6,8 @@ import {useAppContext} from "../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faNewspaper} from "@fortawesome/free-solid-svg-icons";
 import Style from "./Dashboard.module.css";
+import { faStore } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export default function Item(props) {
     const [show, setShow] = useState()
@@ -34,7 +36,7 @@ export default function Item(props) {
         if(props.admin){
             return
         }
-        const response = await fetch(schema + address + "/api/user/v1/", {
+        const response = await fetch(window.location.protocol + address + "/api/user/v1/", {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -58,7 +60,7 @@ export default function Item(props) {
             await setupOptions(users)
         }
 
-        const response = await fetch(schema + address + "/api/item/v1/" + props.item.id, {
+        const response = await fetch(window.location.protocol + address + "/api/item/v1/" + props.item.id, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -71,10 +73,7 @@ export default function Item(props) {
             await setData(values)
             let genres = ""
             if (values.data && values.data.genres) {
-                for (let i = 0; i < values.data.genres.length; i++) {
-                    genres += values.data.genres[i].description + "; ";
-                }
-                setGenre(genres)
+                setGenre(values.data.genres)
             }
         }
     }
@@ -83,7 +82,7 @@ export default function Item(props) {
         if (props.admin) {
             return;
         }
-        const response = await fetch(schema + address + "/api/item/v1/take/" + props.item.id, {
+        const response = await fetch(window.location.protocol + address + "/api/item/v1/take/" + props.item.id, {
             method: "PATCH",
             headers: {
                 'Accept': 'application/json',
@@ -102,7 +101,7 @@ export default function Item(props) {
         if(usr===null){
             return;
         }
-        const response = await fetch(schema + address + "/api/item/v1/send/" + props.item.id, {
+        const response = await fetch(window.location.protocol + address + "/api/item/v1/send/" + props.item.id, {
             method: "PATCH",
             headers: {
                 'Accept': 'application/json',
@@ -127,24 +126,28 @@ export default function Item(props) {
                 {show && data && (
                     <div>
                         <Chapter>
-                            <div>
-                                Status: {data.obtainable ? ("Obtainable") : ("Non Obtainable")}
-                            </div>
-                            <div>
-                                Won by: {data.winner ? (data.winner.username) : ("Nobody")}
-                            </div>
+                            <Panel>
+                                <a href={`https://store.steampowered.com/app/${data.data.appid}`}>
+                                    <FontAwesomeIcon icon={faStore}/> Steam <Code style={{fontSize: "x-small"}}>{data.data.appid}</Code>
+                                </a>
+                            </Panel>
+                            <Panel>
+                                {genre.map(g => g.description).join(", ")}
+                            </Panel>
                         </Chapter>
+                        <Panel>
+                            <FontAwesomeIcon icon={faUser}/> Won by: {data.winner?.username ?? "Nobody yet"}
+                        </Panel>
                         {data.data && (
                             <div>
-                                <Details>
-                                    <Details.Summary>Description</Details.Summary>
-                                    <Details.Content>
-                                        <Panel
-                                            children={data.data.description}/>
-                                    </Details.Content>
-
-                                </Details>
-                                <p>Genres: {genre}</p>
+                                <Panel>
+                                    <Details style={{fontSize: "small"}}>
+                                        <Details.Summary>Description</Details.Summary>
+                                        <Details.Content>
+                                            {data.data.description}
+                                        </Details.Content>
+                                    </Details>
+                                </Panel>
 
                                 {props.admin ? ("") : (
                                     <Panel>
@@ -166,17 +169,15 @@ export default function Item(props) {
                                         <Button onClick={event => (send_item())}> Send item </Button>
 
                                     </Panel>)}
-
-                                <p>APPID: {data.data.appid}</p>
                             </div>
                         )}
                     </div>
                 )}
-                <Button onClick={e => {
+                {!show && <Button onClick={e => {
                     get_item().then(e => {
                         setShow(!show)
                     })
-                }}>{(show ? ("Close") : ("Details"))}</Button>
+                }}>Details</Button>}
             </Panel>
         )
     }
