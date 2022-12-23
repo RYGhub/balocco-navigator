@@ -63,8 +63,7 @@ export default function Dashboard() {
                 <Panel>
                     <Heading level={2}>Ongoing giveaways</Heading>
                     <div className={Style.scrollable}>
-                        {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Box key={giveaway.id}><Giveaway
-                            giveaway={giveaway}/></Box>)}
+                        {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Giveaway giveaway={giveaway}/>)}
                     </div>
                 </Panel>
                 <Panel>

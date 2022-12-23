@@ -122,7 +122,7 @@ export default function Item(props) {
     }
     if(!disable){
         return (
-            <Box>
+            <Panel>
                 <Heading level={3}>{props.item.name} {!taken && (<FontAwesomeIcon icon={faNewspaper}/>)}</Heading>
                 {show && data && (
                     <div>
@@ -177,7 +177,7 @@ export default function Item(props) {
                         setShow(!show)
                     })
                 }}>{(show ? ("Close") : ("Details"))}</Button>
-            </Box>
+            </Panel>
         )
     }
     else{
