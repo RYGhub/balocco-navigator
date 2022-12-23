@@ -113,10 +113,10 @@ export default function GiveawayAdmin(props) {
                     }}><FontAwesomeIcon icon={faWrench}/>&nbsp;Edit</Button>
                     <Button onClick={() => {
                         close()
-                    }}><FontAwesomeIcon icon={faClose}/>&nbsp;Close</Button>
+                    }} builtinColor="orange"><FontAwesomeIcon icon={faClose}/>&nbsp;Close</Button>
                     <Button onClick={() => {
                         run()
-                    }} builtinColor="lime"><FontAwesomeIcon icon={faGears}/>&nbsp;Give!</Button>
+                    }} builtinColor="magenta"><FontAwesomeIcon icon={faGears}/>&nbsp;Give!</Button>
                 </WeirdFlex>
             </Giveaway>
 

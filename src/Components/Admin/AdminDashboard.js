@@ -88,7 +88,7 @@ export default function AdminDashboard() {
                         {giveaways.map(giveaway => <GiveawayAdmin
                             giveaway={giveaway} reload={reload} setReload={setReload} key={giveaway.id}/>)}
                     </div>
-                    <Button onClick={e=>{setAdd(true)}}><FontAwesomeIcon icon={faCirclePlus}/>&nbsp;Add giveaway</Button>
+                    <Button onClick={e=>{setAdd(true)}} builtinColor="lime"><FontAwesomeIcon icon={faCirclePlus}/>&nbsp;Add giveaway</Button>
                     <Modal show={add} onClose={() => {
                         setAdd(false)
                     }}>
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
                 </Panel>
                 <Panel>
                     <Heading level={2}>Items</Heading>
-                    <Button onClick={e=>{setAddItems(true)}}><FontAwesomeIcon icon={faCirclePlus}/>&nbsp;Add items</Button>
+                    <Button onClick={e=>{setAddItems(true)}} builtinColor="lime"><FontAwesomeIcon icon={faCirclePlus}/>&nbsp;Add items</Button>
                     <Modal show={addItems} onClose={() => {
                         setAddItems(false)
                     }}>
