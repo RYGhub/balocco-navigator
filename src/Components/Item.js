@@ -122,7 +122,7 @@ export default function Item(props) {
     }
     if(!disable){
         return (
-            <Panel disabled={taken}>
+            <Panel>
                 <Heading level={3}>{props.item.name}</Heading>
                 {show && data && (
                     <div>
@@ -150,26 +150,32 @@ export default function Item(props) {
                                     </Details>
                                 </Panel>
 
-                                {props.admin ? ("") : (
-                                    <Panel>
-                                        <p>Once the key is shown, this game will belong to you, and you won't be able to
-                                            trade it.</p>
-                                        <Button onClick={event => (take_item())}> Show key </Button>
-                                        <p>{action}</p>
-                                    </Panel>)}
+                                <Chapter>
+                                    {props.admin ? ("") : (
+                                        <Panel builtinColor="orange">
+                                            <p>
+                                                {taken ? "You have claimed this item." : "Once you claim the game, it will belong to you, and you won't be able to trade it anymore."}
+                                            </p>
+                                            {action ? <p>{action}</p> : <Button onClick={event => (take_item())}>{taken ? "Show key" : "Claim game"}</Button>}
+                                        </Panel>)}
 
-                                {props.admin || taken ? ("") : (
-                                    <Panel>
-                                        <p>Since this item has not yet been redeemed, you can send it to someone.</p>
-                                        <Form.Row>
-                                            <Form.Select onSimpleChange={e => {setUsr(e); console.log(e);}} label={""} options={options}
-                                                         value={usr}>
+                                    {taken ? ("") : (
+                                        <Panel builtinColor="cyan">
+                                            <p>Since this item has not yet been redeemed, you can send it to someone else.</p>
+                                            <Form>
+                                                <Form.Row>
+                                                    <Form.Select onSimpleChange={e => {setUsr(e); console.log(e);}} label={""} options={options}
+                                                                value={usr}>
 
-                                            </Form.Select>
-                                        </Form.Row>
-                                        <Button onClick={event => (send_item())}> Send item </Button>
+                                                    </Form.Select>
+                                                </Form.Row>
+                                                <Form.Row>
+                                                    <Button onClick={event => (send_item())}> Send item </Button>
+                                                </Form.Row>
+                                            </Form>
 
-                                    </Panel>)}
+                                        </Panel>)}
+                                </Chapter>
                             </div>
                         )}
                     </div>

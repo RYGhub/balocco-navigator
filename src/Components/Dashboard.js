@@ -66,6 +66,8 @@ export default function Dashboard() {
                         {giveaways.filter(giveaway => giveaway.active === true).map(giveaway => <Giveaway giveaway={giveaway}/>)}
                     </div>
                 </Panel>
+            </Chapter>
+            <Chapter>
                 <Panel>
                     <Heading level={2}>Gifts received</Heading>
                     <div className={Style.scrollable}>
