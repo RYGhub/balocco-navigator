@@ -157,7 +157,7 @@ export default function GiveawayAdmin(props) {
                             <input type={"datetime-local"} style={{background_color:"#FFFFFF", color:"#000000"}} value={time} onChange={event => {setTime(event.target.value)}}/>
                             <input type={"datetime-local"} style={{background_color:"#FFFFFF", color:"#000000"}} value={time2} onChange={event => {setTime2(event.target.value)}}/>
                         </Form.Row>
-                        <Button bluelibClassNames={"color-lime"} onClick={() => {update()}}>
+                        <Button bluelibClassNames={"color-lime"} onClick={() => {update(); setShow(false);}}>
                             {"Update"}
                         </Button>
                     </Form>
