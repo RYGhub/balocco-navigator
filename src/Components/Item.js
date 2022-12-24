@@ -159,7 +159,7 @@ export default function Item(props) {
                                             {action ? <p>{action}</p> : <Button onClick={event => (take_item())}>{taken ? "Show key" : "Claim game"}</Button>}
                                         </Panel>)}
 
-                                    {taken ? ("") : (
+                                    {(taken || !props.admin || !data.winner) ? ("") : (
                                         <Panel builtinColor="cyan">
                                             <p>Since this item has not yet been redeemed, you can send it to someone else.</p>
                                             <Form>
