@@ -21,6 +21,7 @@ export default function Item(props) {
     const [usr, setUsr] = useState("")
     const [options, setOptions] = useState([])
     const [disable, setDisable] = useState(false)
+    const {userData, setUserData} = useAppContext();
 
     async function setupOptions(users) {
         let tmp = []
@@ -122,7 +123,7 @@ export default function Item(props) {
     }
     if(!disable){
         return (
-            <Panel>
+            <Panel style={{opacity: taken ? 0.3 : 1.0, transition: "60s opacity"}}>
                 <Heading level={3}>{props.item.name}</Heading>
                 {show && data && (
                     <div>
@@ -151,15 +152,20 @@ export default function Item(props) {
                                 </Panel>
 
                                 <Chapter>
-                                    {props.admin ? ("") : (
+                                    {data.winner_id === userData.id &&
                                         <Panel builtinColor="orange">
                                             <p>
                                                 {taken ? "You have claimed this item." : "Once you claim the game, it will belong to you, and you won't be able to trade it anymore."}
                                             </p>
-                                            {action ? <p>{action}</p> : <Button onClick={event => (take_item())}>{taken ? "Show key" : "Claim game"}</Button>}
-                                        </Panel>)}
+                                            <p>
+                                                {action ? (
+                                                    action.startsWith("https://") ? <a href={action}>{action}</a> : action
+                                                ) : <Button onClick={event => (take_item())}>{taken ? "Show key" : "Claim game"}</Button>}
+                                            </p>
+                                        </Panel>
+                                    }
 
-                                    {(taken || !props.admin || !data.winner) ? ("") : (
+                                    {!taken && (data.winner_id === userData.id || data.admin) && 
                                         <Panel builtinColor="cyan">
                                             <p>Since this item has not yet been redeemed, you can send it to someone else.</p>
                                             <Form>
@@ -173,8 +179,8 @@ export default function Item(props) {
                                                     <Button onClick={event => (send_item())}> Send item </Button>
                                                 </Form.Row>
                                             </Form>
-
-                                        </Panel>)}
+                                        </Panel>
+                                    }
                                 </Chapter>
                             </div>
                         )}

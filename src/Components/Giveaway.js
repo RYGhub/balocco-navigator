@@ -98,7 +98,7 @@ export default function Giveaway(props) {
                         setShowGames(false)
                     }}>
                         <Heading level={3}>Items</Heading>
-                        {items.map(item=><Item item={item} key={item.id} admin={true}/>)}
+                        {items.map(item=><Item item={item} key={item.id} admin={false}/>)}
                     </Modal>
                 </>
             )}

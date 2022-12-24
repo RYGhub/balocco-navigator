@@ -103,7 +103,7 @@ export default function GiveawayAdmin(props) {
 
     return (
         <>
-            <Giveaway giveaway={props.giveaway}>
+            <Giveaway giveaway={props.giveaway} admin={true}>
                 <WeirdFlex>
                     <Button onClick={() => {
                         setShowUsers(true)
@@ -156,14 +156,6 @@ export default function GiveawayAdmin(props) {
                 <Heading level={3}>Users</Heading>
                 <Panel>
                     {signups.map(signup=><User user={signup.user} key={signup.user.id}/>)}
-                </Panel>
-            </Modal>
-            <Modal show={showGames} onClose={() => {
-                setShowGames(false)
-            }}>
-                <Heading level={3}>Items</Heading>
-                <Panel>
-                    {items.map(item=><Item item={item} key={item.id} admin={true}/>)}
                 </Panel>
             </Modal>
         </>
