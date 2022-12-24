@@ -137,7 +137,7 @@ export default function Item(props) {
                                 </a>
                             </Panel>
                             <Panel>
-                                {genre.map(g => g.description).join(", ")}
+                                {genre?.map?.(g => g.description).join?.(", ")}
                             </Panel>
                         </Chapter>
                         {data.data && (
