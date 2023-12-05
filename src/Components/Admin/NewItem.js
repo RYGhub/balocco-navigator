@@ -57,7 +57,12 @@ export default function NewItem(props) {
                 }
                 sdata = sdata[data[i][0]].data
 
+                let price = null
+                if (sdata.price_overview!=null){
+                    price = sdata.price_overview.final
+                }
                 setName("Now processing "+data[i][0]+" ( "+sdata.name+" ): saving into the database... ("+i+"/"+(data.length-1)+")")
+
                 let gamedata = {
                     name: sdata.name,
                     giveaway_id: giveaway,
@@ -66,10 +71,11 @@ export default function NewItem(props) {
                         genres: sdata.genres,
                         platforms: sdata.platforms,
                         appid: data[i][0],
-                        price: sdata.price_overview.final
+                        price: price
                     },
                     obtain_action: data[i][1]
                 }
+                console.debug(gamedata)
                 await save(gamedata)
                 await delay(1000)
             }
