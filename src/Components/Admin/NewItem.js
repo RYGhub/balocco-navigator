@@ -66,7 +66,7 @@ export default function NewItem(props) {
                         genres: sdata.genres,
                         platforms: sdata.platforms,
                         appid: data[i][0],
-
+                        price: sdata.price_overview.final
                     },
                     obtain_action: data[i][1]
                 }
